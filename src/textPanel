@@ -1,0 +1,19 @@
+import java.awt.GridLayout;
+
+import javax.swing.*;
+public class textPanel extends JPanel {
+	
+	public textPanel(){
+		setLayout(new GridLayout(1,2));
+		add(textBox());
+		add(new JButton("font"));//in spec. it said this should be combo box = drop down manu, will fix later
+	}
+	
+	public JTextField textBox(){
+		JTextField input = new JTextField();
+		input.setEditable(true);
+		return input;
+	}
+	
+	
+}
