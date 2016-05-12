@@ -1,5 +1,14 @@
-import javax.swing.JFrame;
+import java.awt.Color;
 
-public class Controls extends JFrame{
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Controls extends JPanel{
 		// or JPanel, goes to the left side of whiteboard
+	
+	public Controls()
+	{
+		setBackground(Color.black);
+		setSize(400,400);
+	}
 }

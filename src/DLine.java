@@ -1,4 +1,4 @@
 
-public class DLine {
+public class DLine extends DShape{
 
 }
