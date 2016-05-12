@@ -1,0 +1,20 @@
+
+import java.awt.Component;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class Controls extends JPanel {
+	// or JPanel, goes to the left side of whiteboard
+	public Controls() {
+		setLayout(new GridLayout(5, 1));
+		// setBackground(Color.black);
+		setSize(400, 400);
+		add(new addPanel());// panel for creating shapes
+		add(new colorPanel());// panel for setting color
+		add(new textPanel());// panel for setting text
+		add(new posPanel());// panel for moving and removing
+		add(new JButton("hay u5"));// testing purpose
+	}
+
+}
