@@ -1,0 +1,11 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+public class colorPanel extends JPanel {
+	public colorPanel(){
+		setLayout(new GridLayout(1,1));
+		add(new JButton("Set Color"));
+	}
+
+}
