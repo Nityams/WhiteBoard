@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Rectangle;
 
 public class DShape {
 
@@ -6,9 +7,20 @@ public class DShape {
 	int y;
 	Color color;
 	
+	DShapeModel model ;
+	
 	public DShape()
 	{
-		x=0; y=0;
-		color = color.gray;
+		model = new DShapeModel();
+	}
+	// may need to clear the list if all the elements in the list has 0 dimensions
+	public DShape(int x, int y, Color c)
+	{
+		this.x = x; this.y = y; color = c;
+	}
+	public DShape(int x, int y,int height, int width, Color color)
+	{
+		model = new DShapeModel(x,y,height,width,color);
+			
 	}
 }
