@@ -1,9 +1,17 @@
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 public class Controls extends JPanel {
 	// or JPanel, goes to the left side of whiteboard
+	
+	Canvas c = null;
+	
 	public Controls() {
+		c = WhiteBoard.getCanvas();
+		
 		//general stuff for master panel
 		setLayout(new GridLayout(5, 1));
 		setSize(400, 400);
@@ -11,8 +19,34 @@ public class Controls extends JPanel {
 		//adding shapes
 		JPanel addPanel = new JPanel(new GridLayout(1,5));
 		addPanel.add(new JLabel("Add"));
-		addPanel.add(new JButton("Rect"));
-		addPanel.add(new JButton("Oval"));
+		JButton rect = new JButton("Rect");
+		rect.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				c.addShapes(new DRect(50,50,10,20,Color.blue));
+				c.paintComponent();		
+			}
+			
+		});
+		addPanel.add(rect);
+		
+		//addPanel.add(new JButton("Rect").addActionListener(new btnListener("Rect")));
+		JButton oval = new JButton("Oval");
+		oval.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				c.addShapes(new DOval(50,50,30,25,Color.red));
+				c.paintComponent();		
+			}
+			
+		});
+		addPanel.add(oval);
+		
+		//addPanel.add(new JButton("Oval").addActionListener(new btnListener("Oval")));
 		addPanel.add(new JButton("Line"));
 		addPanel.add(new JButton("Text"));
 		
@@ -41,5 +75,6 @@ public class Controls extends JPanel {
 		
 		
 	}
+	
 
 }

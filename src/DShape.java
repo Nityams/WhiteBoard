@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class DShape {
@@ -20,7 +21,11 @@ public class DShape {
 	}
 	public DShape(int x, int y,int height, int width, Color color)
 	{
-		model = new DShapeModel(x,y,height,width,color);
-			
+		model = new DShapeModel(x,y,height,width,color);	
+	}
+	
+	public void draw(Graphics g)
+	{
+		System.out.println("Parent called");
 	}
 }

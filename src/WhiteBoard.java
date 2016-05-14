@@ -6,13 +6,15 @@ import javax.swing.*;
 
 public class WhiteBoard extends JFrame{
 	//singleton to create only one WhiteBoard
-		
+	static Canvas c = new Canvas();		
 		public WhiteBoard()
 		{
+
 			this.setTitle("WhiteBoard");
 			this.setLayout(new BorderLayout());
 			this.add(new Controls(),BorderLayout.WEST);
-			this.add(new Canvas(),BorderLayout.CENTER);
+			this.add(c,BorderLayout.CENTER);
+	//control should use same canvas as WhiteBoard
 			setSize(800,400);
 			setLocationRelativeTo(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,5 +22,9 @@ public class WhiteBoard extends JFrame{
 			
 		}
 
+		public static Canvas getCanvas()
+		{
+			return c;
+		}
 
 }

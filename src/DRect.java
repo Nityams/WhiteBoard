@@ -15,13 +15,14 @@ public DRect(int x, int y,int height, int width, Color color)
 										// if parent then how instanceOf()?
 	// OR 
 	super.model= new DRectModel(x,y,height,width,color);
-	new Rectangle(x,y,height,width);
+	//new Rectangle(x,y,height,width);
 }
 
 public void draw(Graphics g)
 {
 	g.setColor(super.model.color);
-	g.drawRect(super.model.x,super.model.y,super.model.width,super.model.height);
+	g.fillRect(super.model.x,super.model.y,super.model.width,super.model.height);
+	
 }
 
 	

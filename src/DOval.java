@@ -20,7 +20,8 @@ public class DOval extends DShape{
 	public void draw(Graphics g)
 	{
 		g.setColor(super.model.color);
-		g.drawOval(super.model.x,super.model.y,super.model.width,super.model.height);
+		g.fillOval(super.model.x,super.model.y,super.model.width,super.model.height);
+//		g.drawOval();
 	}
 
 	
