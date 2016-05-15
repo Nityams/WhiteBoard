@@ -66,12 +66,17 @@ public class Controls extends JPanel {
 		posPanel.add(new JButton("Remove Shape"));
 		
 		
+		//testing for table. now working on how to grab all data to put into array, I've been stucking here for 2 hours...
+		 String[] columnNames={"X","Y","Widt","Height"};
+		Object[][] data={{12,11,66,55},{4,5,6,7},{4,5,6,7},{1,23,4,5},{4,5,6,7}};
+		
+		
 		//add all panels to the"master" panel
 		add(addPanel);
 		add(colorPanel);
 		add(textPanel);
 		add(posPanel);	
-		add(new tablePanel());//I keep the table like this for now because I still haven't figure out how to do it.
+		add(new JScrollPane(new tablePanel(data, columnNames)));//I keep the table like this for now because I still haven't figure out how to do it.
 		
 		
 	}
