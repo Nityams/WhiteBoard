@@ -1,6 +1,9 @@
 
 import javax.swing.*;
 public class tablePanel extends JTable{
-	table table = new table();
+
+	public tablePanel(Object[][] data, Object[]colName){
+		super(data, colName);
+	}
 	
 }
