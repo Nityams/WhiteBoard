@@ -28,4 +28,9 @@ public class DShape {
 	{
 		System.out.println("Parent called");
 	}
+	
+	//Added by Vic
+	public Object[] getArray(){
+		return model.getArray();
+	}
 }
