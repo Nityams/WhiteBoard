@@ -7,4 +7,3 @@ public class tablePanel extends JTable{
 	}
 	
 }
-

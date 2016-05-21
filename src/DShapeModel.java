@@ -1,8 +1,13 @@
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 public class DShapeModel {
 	int x, y, height, width;
 	Color color;
+	Shape mine; 
 
 	public DShapeModel() {
 		x = 0;
@@ -23,6 +28,22 @@ public class DShapeModel {
 
 	public DShapeModel getDimn() {
 		return this; // or new DShapeModel(with params)
+	}
+	
+	public void mine(Class cla)
+	{
+		if(cla.getName().equals("DRectModel"))
+		{
+			mine = new Rectangle2D.Double(x,y,height,width);
+			System.out.println("Rect2d created"+ x+","+ y+","+ height+","+ width);
+		}
+		else if (cla.getName().equals("DOvalModel"))
+		{
+			mine = new Ellipse2D.Double(x, y, height, width);
+			System.out.println("Oval 2D created"+ x+","+ y+","+ height+","+ width);
+		}
+		else
+			System.out.println("mine error");
 	}
 
 	// add by vic
@@ -49,5 +70,10 @@ public class DShapeModel {
 	public Object[] getArray() {
 		Object[] array = { x, y, height, width };
 		return array;
+	}
+	public boolean contains(Point pnt)
+	{
+//		System.out.println(mine.getBounds2D());
+		return mine.contains(pnt);
 	}
 }

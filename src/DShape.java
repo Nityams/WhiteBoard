@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public class DShape {
@@ -8,11 +9,16 @@ public class DShape {
 	int y;
 	Color color;
 	
+	UI view;
 	DShapeModel model ;
+	
+	void attachView(UI view) {
+		this.view = view;
+	}
 	
 	public DShape()
 	{
-		model = new DShapeModel();
+		//model = new DShapeModel();
 	}
 	// may need to clear the list if all the elements in the list has 0 dimensions
 	public DShape(int x, int y, Color c)
@@ -31,6 +37,13 @@ public class DShape {
 	
 	//Added by Vic
 	public Object[] getArray(){
+		
 		return model.getArray();
 	}
+	
+	public boolean contains(Point pnt)
+	{
+		return model.contains(pnt);
+	}
+
 }
