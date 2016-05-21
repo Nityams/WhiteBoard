@@ -14,9 +14,7 @@ public class DShapeModel {
 		y = 0;
 		height = 0;
 		width = 0;
-		color = color.gray;
-
-	}
+			}
 
 	public DShapeModel(int x, int y, int height, int width, Color color) {
 		this.x = x;
@@ -65,7 +63,7 @@ public class DShapeModel {
 	public int getHeight() {
 		return height;
 	}
-
+	
 	// add by vic
 	public Object[] getArray() {
 		Object[] array = { x, y, height, width };
@@ -81,5 +79,11 @@ public class DShapeModel {
 		return false;
 		
 		//return mine.contains(pnt);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return Integer.toString(x)+","+Integer.toString(y)+","+Integer.toString(width)+","+Integer.toString(height)+ this.color.toString() ;
 	}
 }

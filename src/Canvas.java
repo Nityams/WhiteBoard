@@ -17,7 +17,8 @@ public class Canvas extends JPanel{
 
 	//how to update the shapes?
 	ArrayList<DShape> shapes = new ArrayList<>();
-//		MovingAdapter ma = new MovingAdapter();
+	Clicker ma = new Clicker();
+	//		MovingAdapter ma = new MovingAdapter();
 	// may need to use stack/queue to display last on top 
 	//list of shape objects axnd reflectes each after adding and editing..
 	//also defines the ordering of the shape as last shape comming first	
@@ -49,16 +50,16 @@ public class Canvas extends JPanel{
 			if (dshape instanceof DRect) {
 //				System.out.println("DRect");
 				dshape.draw(getGraphics());
-				addMouseListener(new Clicker());
-				addMouseMotionListener(new Clicker());
+				addMouseListener(ma);
+				addMouseMotionListener(ma);
 //				addMouseMotionListener(ma);//the mouse listener
 //				  addMouseListener(ma);//the mouse listener
 
 			} else if (dshape instanceof DOval) {
 //				System.out.println("DOval");
 				dshape.draw(getGraphics());
-				addMouseListener(new Clicker());
-				addMouseMotionListener(new Clicker());
+				addMouseListener(ma);
+				addMouseMotionListener(ma);
 
 			}
 			/*else if(dshape instanceof DLine)
@@ -87,7 +88,7 @@ public class Canvas extends JPanel{
 	/*
 	 * @param- selected shape to delete
 	 */
-	void remove(DShape delshape) //level package
+	void delete(DShape delshape) //level package
 	{
 		Iterator<DShape> itr = shapes.iterator();
 		if(shapes.contains(delshape))
@@ -99,15 +100,27 @@ public class Canvas extends JPanel{
 			}
 			itr.remove();  // should remove the next element
 		}
+		
 	}
 
 	//sort of working
 	class Clicker extends MouseAdapter 
 	{
-
 		DShape move;
 		int x,y;
 		int num;
+		
+		public void colorMe(Color color)
+		{
+			if(ObjSelected.getnum()!=-1)
+			{
+				System.out.println(ObjSelected.getnum());
+				shapes.get(ObjSelected.getnum()).setColor(color);
+				shapes.get(ObjSelected.getnum()).draw(getGraphics());
+				//move.setColor(color);
+				paintComponent();
+			}
+		}
 		@Override
 		public void mouseClicked(MouseEvent me)
 		{
@@ -118,27 +131,36 @@ public class Canvas extends JPanel{
 		
 		@Override
 		public void mouseDragged(MouseEvent e)
-		{ 
-			System.out.println(num+","+ObjSelected.getnum());
-			move = shapes.get(ObjSelected.getnum());
-			//super.mouseDragged(e);
-			System.out.println(move+"Dragged!!!");
-		  int dx = e.getPoint().x - move.model.x;
-	      int dy = e.getPoint().y - move.model.y;
-	      dx = dx-10;
-	      dy = dy-10;
-	      move.model.x += dx;
-	      move.model.y += dy;
-	     // paintComponent();
-	      repaint(); 
-	      move.draw(getGraphics());
-	      
+		{
+			if(!(ObjSelected.getnum()<0)){
+
+				System.out.println("Moving this: "+ObjSelected.getnum());
+				move = shapes.get(ObjSelected.getnum());
+				//super.mouseDragged(e);
+				System.out.println(move+"Dragged!!!");
+				int dx = e.getPoint().x - move.model.x;
+				int dy = e.getPoint().y - move.model.y;
+				dx = dx-10;
+				dy = dy-10;
+				move.model.x += dx;
+				move.model.y += dy;
+				// paintComponent();
+				repaint(); 
+				move.draw(getGraphics());
+			}
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			for(DShape s: shapes)
-			s.draw(getGraphics());	}
+			if(!(ObjSelected.getnum()<0))
+			{
+				move = shapes.get(ObjSelected.getnum());
+				for(DShape s: shapes)
+				{s.draw(getGraphics());}
+			//	UI.model.fireTableDataChanged();
+				System.out.println(move.model);
+			}	
+		}
 
 
 		@Override

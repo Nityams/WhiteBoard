@@ -7,7 +7,7 @@ public class DShape {
 
 	int x;
 	int y;
-	Color color;
+	Color color ;
 	
 	UI view;
 	DShapeModel model ;
@@ -27,7 +27,7 @@ public class DShape {
 	}
 	public DShape(int x, int y,int height, int width, Color color)
 	{
-		model = new DShapeModel(x,y,height,width,color);	
+		model = new DShapeModel(x,y,height,width,this.color);	
 	}
 	
 	public void draw(Graphics g)
@@ -40,7 +40,10 @@ public class DShape {
 		
 		return model.getArray();
 	}
-	
+	public void setColor(Color c)
+	{
+		color = c;
+	}
 	public boolean contains(Point pnt)
 	{
 		return model.contains(pnt);

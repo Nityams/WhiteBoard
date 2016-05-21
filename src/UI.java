@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,14 +14,14 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class UI extends JFrame {
+public class UI extends JFrame{
 
 	// Presenter presenter;
 	DShape presenter;
 	static Canvas canvas = new Canvas();
 	private static int shapeCounter = 0;
 	private String[] columnNames={"X","Y","Width","Height"};
-
+	
 	
 	public UI(DShape presenter) {
 		this.presenter = presenter;
@@ -39,6 +40,7 @@ public class UI extends JFrame {
 		
 		//model.addRow(canvas.shapes.toArray());//<-------------------------------------------------
 		JTable table = new JTable(model);
+			
 //		JTable table = new JTable(data, columnNames);
 		JScrollPane tablePane = new JScrollPane(table);
 
@@ -54,7 +56,7 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Random rand = new Random();
-				DRect rect = new DRect(50+rand.nextInt(100), 100+rand.nextInt(100), 100, 200, new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
+				DRect rect = new DRect(50+rand.nextInt(100), 100+rand.nextInt(100), 100, 200, Color.gray);
 				canvas.addShapes(rect);
 				canvas.paintComponent();
 				DShape temp = canvas.shapes.get(canvas.shapes.size()-1);
@@ -91,12 +93,44 @@ public class UI extends JFrame {
 
 		// controls={addPanel, colorPanel,textPanel,posPanel, tablePanel}
 		JPanel controls = new JPanel();
-		controls.setLayout(new GridLayout(5, 1));
+		controls.setLayout(new GridLayout(6, 1));
 		controls.add(addPanel);
-		controls.add(new JButton("www"));
+		
+		JButton update = new JButton("Update table");
+		update.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("clicked");
+				model.fireTableDataChanged();
+				table.repaint();
+			}
+			
+		});
+		controls.add(update);
+		
+		JButton setColor = new JButton("Set Color");
+		setColor.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Color myColor = JColorChooser.showDialog(((Component) e.getSource())
+			            .getParent(), "Choose color", Color.gray);
+				System.out.println(myColor.toString());
+				canvas.ma.colorMe(myColor);
+				
+//				canvas.move.model.setColor(myColor);
+//				canvas.paintComponent();
+				}
+			
+		});
+		controls.add(setColor);
 		controls.add(new JButton("xxx"));
 		controls.add(new JButton("ggg"));
+		
 		controls.add(tablePane);
+	
 
 		this.setTitle("WhiteBoard test");
 		this.setLayout(new BorderLayout());
