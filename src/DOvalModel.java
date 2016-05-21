@@ -9,7 +9,7 @@ public class DOvalModel extends DShapeModel {
 		// TODO Auto-generated constructor stub
 		
 			super(x,y,height,width,color);
-		super.mine(this.getClass());
+	//	super.contains(pnt);
 		
 	}
 

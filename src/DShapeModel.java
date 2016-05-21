@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 public class DShapeModel {
 	int x, y, height, width;
 	Color color;
-	Shape mine; 
+//	Shape mine; 
 
 	public DShapeModel() {
 		x = 0;
@@ -30,21 +30,21 @@ public class DShapeModel {
 		return this; // or new DShapeModel(with params)
 	}
 	
-	public void mine(Class cla)
-	{
-		if(cla.getName().equals("DRectModel"))
-		{
-			mine = new Rectangle2D.Double(x,y,height,width);
-			System.out.println("Rect2d created"+ x+","+ y+","+ height+","+ width);
-		}
-		else if (cla.getName().equals("DOvalModel"))
-		{
-			mine = new Ellipse2D.Double(x, y, height, width);
-			System.out.println("Oval 2D created"+ x+","+ y+","+ height+","+ width);
-		}
-		else
-			System.out.println("mine error");
-	}
+//	public void mine(Class cla)
+//	{
+//		if(cla.getName().equals("DRectModel"))
+//		{
+//			mine = new Rectangle2D.Double(x,y,height,width);
+//			System.out.println("Rect2d created"+ x+","+ y+","+ height+","+ width);
+//		}
+//		else if (cla.getName().equals("DOvalModel"))
+//		{
+//			mine = new Ellipse2D.Double(x, y, height, width);
+//			System.out.println("Oval 2D created"+ x+","+ y+","+ height+","+ width);
+//		}
+//		else
+//			System.out.println("mine error");
+//	}
 
 	// add by vic
 	public int getX() {
@@ -72,8 +72,14 @@ public class DShapeModel {
 		return array;
 	}
 	public boolean contains(Point pnt)
-	{
-//		System.out.println(mine.getBounds2D());
-		return mine.contains(pnt);
+	{//System.out.println("Bounds:"+mine.getBounds2D());
+		if(pnt.x>=this.x && pnt.x<(this.x+this.width))
+		{
+			if(pnt.y>=this.y && pnt.y<(this.y+this.height))
+				return true;
+		}
+		return false;
+		
+		//return mine.contains(pnt);
 	}
 }

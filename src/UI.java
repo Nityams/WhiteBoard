@@ -54,7 +54,7 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Random rand = new Random();
-				DRect rect = new DRect(50+rand.nextInt(100), 10+rand.nextInt(100), 100, 200, new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
+				DRect rect = new DRect(50+rand.nextInt(100), 100+rand.nextInt(100), 100, 200, new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
 				canvas.addShapes(rect);
 				canvas.paintComponent();
 				DShape temp = canvas.shapes.get(canvas.shapes.size()-1);
@@ -73,7 +73,7 @@ public class UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DOval oval = new DOval(50, 50, 100, 200, Color.red);
+				DOval oval = new DOval(100, 100, 100, 200, Color.red);
 				canvas.addShapes(oval);
 				canvas.paintComponent();
 		//		data[shapeCounter] = oval.getArray();

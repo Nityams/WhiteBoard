@@ -44,10 +44,10 @@ public class Canvas extends JPanel{
 
 	void paintComponent()
 	{
-		System.out.println("-----------------");
+//		System.out.println("-----------------");
 		for (DShape dshape : shapes) {
 			if (dshape instanceof DRect) {
-				System.out.println("DRect");
+//				System.out.println("DRect");
 				dshape.draw(getGraphics());
 				addMouseListener(new Clicker());
 				addMouseMotionListener(new Clicker());
@@ -55,7 +55,7 @@ public class Canvas extends JPanel{
 //				  addMouseListener(ma);//the mouse listener
 
 			} else if (dshape instanceof DOval) {
-				System.out.println("DOval");
+//				System.out.println("DOval");
 				dshape.draw(getGraphics());
 				addMouseListener(new Clicker());
 				addMouseMotionListener(new Clicker());
@@ -107,90 +107,85 @@ public class Canvas extends JPanel{
 
 		DShape move;
 		int x,y;
-		int num=0;
+		int num;
 		@Override
 		public void mouseClicked(MouseEvent me)
 		{
-			super.mouseClicked(me);
-			boolean brk = false;
-			int count=shapes.size()-1;
+		//	super.mouseClicked(me);
+		//	boolean brk = false;
 			
-			while(brk == false && count>=0)
-			{
-				System.out.println("****"+count+"****");
-				DShape s = shapes.get(count);
-				System.out.println(count+"--------");
-				System.out.println(s);
-				System.out.println(s.contains(me.getPoint()));
-				--count;
-				if(s.contains(me.getPoint()))
-				{ 						
-					if(s instanceof DRect)
-					{
-						num = count;
-						move = s;
-					System.out.println("Drect clicked"+count);
-					}
-					else if(s instanceof DOval)
-					{
-						num = count;
-						move = new DOval();
-						move = s;
-					System.out.println("DOval clicked!"+count);
-					}
-					brk = true;
-				}
-			}
-			System.out.println("move this obj-"+move);
 		}
 		
 		@Override
 		public void mouseDragged(MouseEvent e)
 		{ 
-			
-			move = shapes.get(num);
+			System.out.println(num+","+ObjSelected.getnum());
+			move = shapes.get(ObjSelected.getnum());
 			//super.mouseDragged(e);
 			System.out.println(move+"Dragged!!!");
 		  int dx = e.getPoint().x - move.model.x;
 	      int dy = e.getPoint().y - move.model.y;
+	      dx = dx-10;
+	      dy = dy-10;
 	      move.model.x += dx;
 	      move.model.y += dy;
 	     // paintComponent();
-	      move.draw(getGraphics());
 	      repaint(); 
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-//			paintComponent();
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-//			paintComponent();
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-//			paintComponent();
+	      move.draw(getGraphics());
+	      
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			paintComponent();
-		}
+			for(DShape s: shapes)
+			s.draw(getGraphics());	}
+
 
 		@Override
-		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
+		public void mouseExited(MouseEvent e) {}		@Override
+		public void mousePressed(MouseEvent me) {//may be here?
 			
+			int count=shapes.size()-1;
+			
+			while(!(count<0))
+			{
+				System.out.println("****"+count+"****");
+				DShape s = shapes.get(count);
+//				System.out.println(count+"--------");
+//				System.out.println(s);
+				System.out.println(s.contains(me.getPoint()));
+				ObjSelected.setnum(-1);
+				if(s.contains(me.getPoint()))
+				{ 						
+					if(s instanceof DRect)
+					{
+						//num = count;
+						ObjSelected.setnum(count);
+						count = -1;
+//						move = s;
+					System.out.println("Drect clicked"+count);
+					}
+					else if(s instanceof DOval)
+					{
+						//num = count;
+						ObjSelected.setnum(count);
+						count = -1;
+//						move = new DOval();
+//						move = s;
+						System.out.println("DOval clicked!"+count);
+					}
+					System.out.println(count);
+//					brk = true;
+				}
+				count--;
+			}
+			System.out.println("move this obj number : "+ObjSelected.getnum());
+			}	
+		
+		@Override
+		public void mouseMoved(MouseEvent e) {}			@Override
+		public void mouseEntered(MouseEvent e) {}
 		}
-			
-	
 	}
 			
 //				for(DShape s: shapes)
@@ -246,6 +241,6 @@ public class Canvas extends JPanel{
 //			      x += dx;
 //			      y += dy;*/
 //			    }
-			  }
+			  
 	
 
