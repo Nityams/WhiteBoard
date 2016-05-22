@@ -52,6 +52,7 @@ public class DShape {
 	{
 		return model.contains(pnt);
 	}
+	
 	int getX()
 	{
 		return model.getX();
