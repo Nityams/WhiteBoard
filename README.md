@@ -1,6 +1,6 @@
 # WhiteBoard
-user: 010279867 (Shrestha, Nityam) 
-user: 008550581 (Yeung, Victoria)
+user: 
+user: 
 =================================
 SUMMERY OF FILE
 ----------------
