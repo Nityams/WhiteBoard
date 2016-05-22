@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 
 public class Client {
-	 private String field;
+	 private String field; 
 	    private JTextArea textArea;
 	    private String status;
 	    private java.util.List<ObjectOutputStream> outputs =
