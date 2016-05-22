@@ -20,10 +20,13 @@ public class DShape {
 	{
 		//model = new DShapeModel();
 	}
-	// may need to clear the list if all the elements in the list has 0 dimensions
 	public DShape(int x, int y, Color c)
 	{
 		this.x = x; this.y = y; color = c;
+	}
+	public DShape(Point x, Point y)
+	{
+		model = new DShapeModel(x,y);
 	}
 	public DShape(int x, int y,int height, int width, Color color)
 	{
@@ -33,6 +36,7 @@ public class DShape {
 	public void draw(Graphics g)
 	{
 		System.out.println("Parent called");
+		
 	}
 	
 	//Added by Vic
@@ -47,6 +51,22 @@ public class DShape {
 	public boolean contains(Point pnt)
 	{
 		return model.contains(pnt);
+	}
+	int getX()
+	{
+		return model.getX();
+	}
+	int getY()
+	{
+		return model.getY();
+	}
+	int getHeight()
+	{
+		return model.getHeight();
+	}
+	int getWidth()
+	{
+		return model.getWidth();
 	}
 
 }

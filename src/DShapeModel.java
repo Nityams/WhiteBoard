@@ -5,8 +5,10 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 public class DShapeModel {
-	int x, y, height, width;
+	int x=0, y=0, height=0, width=0;
 	Color color;
+	
+	Point p1, p2;
 //	Shape mine; 
 
 	public DShapeModel() {
@@ -15,6 +17,12 @@ public class DShapeModel {
 		height = 0;
 		width = 0;
 			}
+	public DShapeModel(Point p1, Point p2)
+	{
+		this.p1 = p1;
+		this.p2 = p2;
+	}
+	
 
 	public DShapeModel(int x, int y, int height, int width, Color color) {
 		this.x = x;
@@ -90,7 +98,9 @@ public class DShapeModel {
 		return array;
 	}
 	public boolean contains(Point pnt)
-	{//System.out.println("Bounds:"+mine.getBounds2D());
+	{
+		if(this.x== 0||this.y == 0|| this.height==0|| this.width == 0)
+			return false;
 		if(pnt.x>=this.x && pnt.x<(this.x+this.width))
 		{
 			if(pnt.y>=this.y && pnt.y<(this.y+this.height))

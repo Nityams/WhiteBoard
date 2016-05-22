@@ -89,14 +89,13 @@ public class Canvas extends JPanel{
 				addMouseMotionListener(ma);
 
 			}
-			/*else if(dshape instanceof DLine)
+			else if(dshape instanceof DLine)
 			{
-				System.out.println("DLine");
-//				DLine paintShape = new DLine();
-//				paintShape = (DLine)shapes.get(i);
-//				paintShape.draw(getGraphics());
+				((DLine) dshape).draw(getGraphics());
+				addMouseListener(ma);
+				addMouseMotionListener(ma);
 			}
-			else if(dshape instanceof DText)
+			/*else if(dshape instanceof DText)
 			{
 				System.out.println("DText");
 //				DText paintShape = new DText();
@@ -183,21 +182,37 @@ public class Canvas extends JPanel{
 		@Override
 		public void mouseDragged(MouseEvent e)
 		{
-			if(!(ObjSelected.getnum()<0)){
-
+			if(!(ObjSelected.getnum()<0))
+			{
 				System.out.println("Moving this: "+ObjSelected.getnum());
 				move = shapes.get(ObjSelected.getnum());
 				//super.mouseDragged(e);
 				System.out.println(move+"Dragged!!!");
-				int dx = e.getPoint().x - move.model.x;
-				int dy = e.getPoint().y - move.model.y;
-				dx = dx-10;
-				dy = dy-10;
-				move.model.x += dx;
-				move.model.y += dy;
-				// paintComponent();
-				repaint(); 
-				move.draw(getGraphics());
+				if(move instanceof DLine)
+				{
+					if(e.getPoint() == ((DLine) move).line.getP1())
+					{
+						((DLine) move).line.setP1(e.getPoint());
+					}
+					
+					else if(e.getPoint() == ((DLine) move).line.getP2())
+					{
+						((DLine) move).line.setP2(e.getPoint());
+					}
+				}	
+					else
+					{
+					int dx = e.getPoint().x - move.model.x;
+					int dy = e.getPoint().y - move.model.y;
+					dx = dx-10;
+					dy = dy-10;
+					move.model.x += dx;
+					move.model.y += dy;
+					// paintComponent();
+					repaint(); 
+					move.draw(getGraphics());
+				}
+				
 			}
 		}
 
@@ -226,11 +241,8 @@ public class Canvas extends JPanel{
 			{
 				System.out.println("****"+count+"****");
 				DShape s = shapes.get(count);
-//				System.out.println(count+"--------");
-//				System.out.println(s);
-				System.out.println(s.contains(me.getPoint()));
 				ObjSelected.setnum(-1);
-				if(s.contains(me.getPoint()))
+			 if(s.contains(me.getPoint()))
 				{ 						
 					if(s instanceof DRect)
 					{
@@ -249,6 +261,7 @@ public class Canvas extends JPanel{
 //						move = s;
 						System.out.println("DOval clicked!"+count);
 					}
+					
 					System.out.println(count);
 //					brk = true;
 				}
