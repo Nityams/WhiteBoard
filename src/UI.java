@@ -96,7 +96,69 @@ public class UI extends JFrame {
 			}
 
 		});
-		// textPanel
+				// textPanel
+		JPanel textPanel = new JPanel(new GridLayout(1,2));
+		
+		JTextField text = new JTextField("WhiteBoard!");
+		text.setEditable(true);
+		
+		
+		GraphicsEnvironment graphEnviron =                                        //credit to stackoverflow
+			       GraphicsEnvironment.getLocalGraphicsEnvironment();
+			Font[] allFonts = graphEnviron.getAllFonts();
+
+			JComboBox<Font> fontBox = new JComboBox<>(allFonts);
+			fontBox.setRenderer(new DefaultListCellRenderer() {
+			   @Override
+			   public Component getListCellRendererComponent(JList<?> list,
+			         Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			      if (value != null) {
+			         Font font = (Font) value;
+			         value = font.getName();
+			         //how to change font...
+			      }
+			      return super.getListCellRendererComponent(list, value, index,
+			            isSelected, cellHasFocus);
+			   }
+			});
+
+		
+		textPanel.add(text);
+		textPanel.add(new JScrollPane(fontBox));
+		
+		// TEXTpart of addPanel
+		JButton textBtn = new JButton("Text");
+		textBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//System.out.println(text.getText());<-----it prints!!!!!
+				DText t = new DText(text.getText());
+				canvas.addShapes(t);
+				canvas.paintComponent();
+				
+				DShape temp = canvas.shapes.get(canvas.shapes.size() - 1);
+				model.addRow(new Object[] { Integer.toString(temp.model.x), Integer.toString(temp.model.y),
+						Integer.toString(temp.model.height), Integer.toString(temp.model.width) });
+				shapeCounter++;
+				
+			}
+
+		});
+		addPanel.add(textBtn);
+		
+		// posPanel
+		JPanel posPanel = new JPanel();
+		posPanel.setLayout(new GridLayout(1, 3));
+		// Delete Button
+		JButton delete = new JButton("Delete");
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				canvas.ma.thisDelete();
+			}
+		});
 		// posPanel
 		JPanel posPanel = new JPanel();
 		posPanel.setLayout(new GridLayout(1, 3));
