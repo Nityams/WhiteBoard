@@ -16,7 +16,7 @@ public class UI extends JFrame {
 
 	// Presenter presenter;
 	DShape presenter;
-	static Canvas canvas = new Canvas();
+	static Canvas canvas = new Canvas(); 
 	private static int shapeCounter = 0;
 	private String[] columnNames = { "X", "Y", "Width", "Height" };
 
