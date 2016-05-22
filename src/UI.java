@@ -172,29 +172,29 @@ public class UI extends JFrame {
 		ioPanel.add(output);// save
 
 		// serverPanel
-//		JPanel connectPane = new JPanel(new GridLayout(1, 2));
-//		JButton server = new JButton("Server");
-//		server.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Server server = new Server();
-//				server.doServer();
-//			}
-//
-//		});
-//		JButton client = new JButton("Client");
-//		client.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Client client = new Client();
-//				client.print();
-//			}
-//
-//		});
-//		connectPane.add(server);
-//		connectPane.add(client);
+		JPanel connectPane = new JPanel(new GridLayout(1, 2));
+		JButton server = new JButton("Server");
+		server.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Server server = new Server();
+				server.doServer();
+			}
+
+		});
+		JButton client = new JButton("Client");
+		client.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Client client = new Client();
+				client.print();
+			}
+
+		});
+		connectPane.add(server);
+		connectPane.add(client);
 
 		// controls={addPanel, colorPanel,textPanel,posPanel, tablePanel}
 		JPanel controls = new JPanel();
