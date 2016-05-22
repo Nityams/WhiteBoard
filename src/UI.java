@@ -90,26 +90,39 @@ public class UI extends JFrame{
 		// colorPanel
 		// textPanel
 		// posPanel
+		
+			// Save/Open
+		JPanel io = new JPanel();
+		io.setLayout(new GridLayout(1,2));
+		JButton output = new JButton("Save");
+		output.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				output output = new output();
+				output.save();
+			}
+
+		});
+		JButton input = new JButton("Open");
+		input.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				input input = new input();
+				input.open();
+			}
+			
+		});
+		io.add(input);//open
+		io.add(output);//save
 
 		// controls={addPanel, colorPanel,textPanel,posPanel, tablePanel}
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(6, 1));
 		controls.add(addPanel);
-		
-		JButton update = new JButton("Update table");
-		update.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("clicked");
-				model.fireTableDataChanged();
-				table.repaint();
-			}
-			
-		});
-		controls.add(update);
-		
 		JButton setColor = new JButton("Set Color");
 		setColor.addActionListener(new ActionListener(){
 
@@ -130,6 +143,7 @@ public class UI extends JFrame{
 		controls.add(new JButton("ggg"));
 		
 		controls.add(tablePane);
+		contorls.add(io);
 	
 
 		this.setTitle("WhiteBoard test");
