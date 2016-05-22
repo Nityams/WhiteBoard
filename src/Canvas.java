@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -95,13 +96,13 @@ public class Canvas extends JPanel{
 				addMouseListener(ma);
 				addMouseMotionListener(ma);
 			}
-			/*else if(dshape instanceof DText)
+			else if(dshape instanceof DText)
 			{
-				System.out.println("DText");
-//				DText paintShape = new DText();
-//				paintShape = (DText)shapes.get(i);
-////				paintShape.draw(getGraphics());
-			}*/
+
+				dshape.draw(getGraphics());
+				addMouseListener(ma);
+				addMouseMotionListener(ma);
+			}
 
 			else
 			{
@@ -150,6 +151,16 @@ public class Canvas extends JPanel{
 			{
 				System.out.println(ObjSelected.getnum());
 				shapes.get(ObjSelected.getnum()).setColor(color);
+				shapes.get(ObjSelected.getnum()).draw(getGraphics());
+			}ObjSelected.setnum(-1);
+		}
+		
+		public void fontMe(Font font)
+		{
+			if(ObjSelected.getnum()!=-1)
+			{
+				System.out.println(ObjSelected.getnum());
+				((DText) shapes.get(ObjSelected.getnum())).setFont(font);
 				shapes.get(ObjSelected.getnum()).draw(getGraphics());
 			}ObjSelected.setnum(-1);
 		}
@@ -261,7 +272,15 @@ public class Canvas extends JPanel{
 //						move = s;
 						System.out.println("DOval clicked!"+count);
 					}
-					
+					else if(s instanceof DText)
+					{
+						//num = count;
+						ObjSelected.setnum(count);
+						count = -1;
+//						move = new DOval();
+//						move = s;
+						System.out.println("DText clicked!"+count);
+					}
 					System.out.println(count);
 //					brk = true;
 				}

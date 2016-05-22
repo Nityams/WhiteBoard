@@ -2,12 +2,18 @@ import java.awt.*;
 
 public class DText extends DShape {
 	UI view;
-	DTextModel model ;
+	static DTextModel model ;
 	
 	public DText(String input)
 	{
 		model = new DTextModel(input);	
 		model.setInput(input);
+	}
+	public DText(String input,Font font)
+	{
+		model = new DTextModel(input);	
+		model.setInput(input);
+		model.setFont(font);
 	}
 	public void draw(Graphics g){
 		Graphics2D graphic = (Graphics2D) g;
@@ -23,7 +29,7 @@ public class DText extends DShape {
 	public Color getColor(){
 		return model.getColor();
 	}
-	public void setFont(Font font){
+	public static void setFont(Font font){
 		model.setFont(font);
 	}
 	public Font getFont(){

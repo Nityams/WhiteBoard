@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -16,7 +18,7 @@ public class UI extends JFrame {
 
 	// Presenter presenter;
 	DShape presenter;
-	static Canvas canvas = new Canvas(); 
+	static Canvas canvas = new Canvas();
 	private static int shapeCounter = 0;
 	private String[] columnNames = { "X", "Y", "Width", "Height" };
 
@@ -32,7 +34,7 @@ public class UI extends JFrame {
 
 		// tablePanel:
 		// int numRows = 5 ;
-		DefaultTableModel model = new DefaultTableModel(0, columnNames.length);
+		final DefaultTableModel model = new DefaultTableModel(0, columnNames.length);
 		model.setColumnIdentifiers(columnNames);
 
 		JTable table = new JTable(model);
@@ -81,6 +83,25 @@ public class UI extends JFrame {
 
 		});
 		addPanel.add(oval);
+		// line
+		JButton bline = new JButton("Line");
+		bline.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DLine line = new DLine(new Point(50, 100), new Point(100, 50));
+				canvas.addShapes(line);
+				canvas.paintComponent();
+				DShape temp = canvas.shapes.get(canvas.shapes.size() - 1);
+
+				// add info here
+				model.addRow(new Object[] { 0, 0, 0, 0 });
+				shapeCounter++;
+
+			}
+
+		});
+		addPanel.add(bline);
 
 		// colorPanel
 		JButton setColor = new JButton("Set Color");
@@ -96,60 +117,66 @@ public class UI extends JFrame {
 			}
 
 		});
-				// textPanel
-		JPanel textPanel = new JPanel(new GridLayout(1,2));
-		
-		JTextField text = new JTextField("WhiteBoard!");
+		// textPanel
+		JPanel textPanel = new JPanel(new GridLayout(1, 2));
+
+		final JTextField text = new JTextField("WhiteBoard!");
 		text.setEditable(true);
-		
-		
-		GraphicsEnvironment graphEnviron =                                        //credit to stackoverflow
-			       GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Font[] allFonts = graphEnviron.getAllFonts();
 
-			JComboBox<Font> fontBox = new JComboBox<>(allFonts);
-			fontBox.setRenderer(new DefaultListCellRenderer() {
-			   @Override
-			   public Component getListCellRendererComponent(JList<?> list,
-			         Object value, int index, boolean isSelected, boolean cellHasFocus) {
-			      if (value != null) {
-			         Font font = (Font) value;
-			         value = font.getName();
-			         //how to change font...
-			      }
-			      return super.getListCellRendererComponent(list, value, index,
-			            isSelected, cellHasFocus);
-			   }
-			});
+		GraphicsEnvironment graphEnviron = // credit to stackoverflow
+		GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Font[] allFonts = graphEnviron.getAllFonts();
 
-		
+		final JComboBox<Font> fontBox = new JComboBox<>(allFonts);
+		fontBox.setRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				if (value != null) {
+					Font font = (Font) value;
+					value = font.getName();
+				}
+				return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			}
+		});
+
 		textPanel.add(text);
 		textPanel.add(new JScrollPane(fontBox));
-		
+
 		// TEXTpart of addPanel
 		JButton textBtn = new JButton("Text");
+
 		textBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//System.out.println(text.getText());<-----it prints!!!!!
+				// System.out.println(text.getText());//<-----it prints!!!!!
 				DText t = new DText(text.getText());
 				canvas.addShapes(t);
 				canvas.paintComponent();
-				
-				DShape temp = canvas.shapes.get(canvas.shapes.size() - 1);
-				model.addRow(new Object[] { Integer.toString(temp.model.x), Integer.toString(temp.model.y),
-						Integer.toString(temp.model.height), Integer.toString(temp.model.width) });
-				shapeCounter++;
-				
+
 			}
 
 		});
 		addPanel.add(textBtn);
-		
+
+		fontBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Font fontHolder = (Font) fontBox.getSelectedItem();
+				// System.out.println(fontHolder.toString());
+				DText.setFont(fontHolder);
+				canvas.ma.fontMe(fontHolder);
+
+			}
+		});
+
 		// posPanel
 		JPanel posPanel = new JPanel();
 		posPanel.setLayout(new GridLayout(1, 3));
+
 		// Delete Button
 		JButton delete = new JButton("Delete");
 		delete.addActionListener(new ActionListener() {
@@ -159,20 +186,7 @@ public class UI extends JFrame {
 				canvas.ma.thisDelete();
 			}
 		});
-		// posPanel
-		JPanel posPanel = new JPanel();
-		posPanel.setLayout(new GridLayout(1, 3));
-		// Delete Button
-		JButton delete = new JButton("Delete");
-		delete.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				canvas.ma.thisDelete();
-
-			}
-
-		});
 		// Front Button
 		JButton front = new JButton("Move to front");
 		front.addActionListener(new ActionListener() {
@@ -258,16 +272,16 @@ public class UI extends JFrame {
 		connectPane.add(server);
 		connectPane.add(client);
 
-		// controls={addPanel, colorPanel,textPanel,posPanel, tablePanel}
+		// controls={addPanel, Panel,textPanel,posPanel, tablePanel}
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(7, 1));
 		controls.add(addPanel);
 		controls.add(setColor);
-		// controls.add(textPanel)<--------------need add
+		controls.add(textPanel);
 		controls.add(posPanel);
 		controls.add(tablePane);
 		controls.add(ioPanel);
-		//controls.add(connectPane);
+		controls.add(connectPane);
 
 		this.setTitle("WhiteBoard");
 		this.setLayout(new BorderLayout());
