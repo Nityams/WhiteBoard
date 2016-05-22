@@ -91,38 +91,37 @@ public class UI extends JFrame{
 		// textPanel
 		// posPanel
 		
-			// Save/Open
+		//save/open
 		JPanel io = new JPanel();
 		io.setLayout(new GridLayout(1,2));
 		JButton output = new JButton("Save");
-		output.addActionListener(new ActionListener() {
+		output.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				output output = new output();
+				output output = new output();				
 				output.save();
 			}
-
+			
 		});
+		
 		JButton input = new JButton("Open");
 		input.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				input input = new input();
 				input.open();
 			}
 			
 		});
-		io.add(input);//open
+		io.add(input); // open
 		io.add(output);//save
-
 		// controls={addPanel, colorPanel,textPanel,posPanel, tablePanel}
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(6, 1));
 		controls.add(addPanel);
+				
 		JButton setColor = new JButton("Set Color");
 		setColor.addActionListener(new ActionListener(){
 
@@ -139,11 +138,51 @@ public class UI extends JFrame{
 			
 		});
 		controls.add(setColor);
-		controls.add(new JButton("xxx"));
-		controls.add(new JButton("ggg"));
 		
+		JButton delete = new JButton("Delete");
+		delete.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				canvas.ma.thisDelete();
+				
+			}
+			
+		});
+		controls.add(delete);
+		
+		JButton front = new JButton("Move to front");
+		front.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("please go to front");
+				
+				canvas.ma.thisMove(0);
+				
+			}
+			
+		});
+		controls.add(front);
+		
+		JButton back = new JButton("Move to back");
+		back.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("please go to front");
+				
+				canvas.ma.thisMove(1);
+				
+			}
+			
+		});
+		controls.add(back);
+			
 		controls.add(tablePane);
-		contorls.add(io);
+		controls.add(io);
 	
 
 		this.setTitle("WhiteBoard test");

@@ -42,7 +42,34 @@ public class Canvas extends JPanel{
 		// may need to check instance of delshape
 		shapes.add(delshape);
 	}
-
+	
+	void refresh()
+	{
+		repaint();
+		for(int i=0; i<shapes.size(); i++)
+			shapes.get(i).draw(getGraphics());
+		paintComponent();
+	
+		
+	}
+	
+	void swap(int x, int num)
+	{
+		System.out.println("before"+shapes);
+		if(x==0) // back to front
+		{
+			DShape temp = shapes.get(shapes.size()-1);
+			shapes.set(shapes.size()-1, shapes.get(num));
+			shapes.set(num, temp);
+		}
+		else if(x==1)
+		{
+			DShape temp = shapes.get(0);
+			shapes.set(0, shapes.get(num));
+			shapes.set(num, temp);
+		}
+		refresh();
+	}
 	void paintComponent()
 	{
 //		System.out.println("-----------------");
@@ -88,18 +115,26 @@ public class Canvas extends JPanel{
 	/*
 	 * @param- selected shape to delete
 	 */
-	void delete(DShape delshape) //level package
+	
+	void delete(int deleteNum) //level package
 	{
-		Iterator<DShape> itr = shapes.iterator();
-		if(shapes.contains(delshape))
-		{
-
-			while(itr.next() != delshape)
+		System.out.println(deleteNum+" needs to be deleted");
+		shapes.remove(deleteNum);
+		System.out.println(shapes.size());
+//		paintComponent();
+//		repaint();
+		if(shapes.size()>0)
 			{
-				itr.next();
+			for(int i=0; i<shapes.size(); i++)
+				{	
+					shapes.get(i).draw(getGraphics());
+				}
+			paintComponent();
 			}
-			itr.remove();  // should remove the next element
-		}
+		refresh();
+//		paintComponent();
+		
+		// amy be for each draw
 		
 	}
 
@@ -117,10 +152,26 @@ public class Canvas extends JPanel{
 				System.out.println(ObjSelected.getnum());
 				shapes.get(ObjSelected.getnum()).setColor(color);
 				shapes.get(ObjSelected.getnum()).draw(getGraphics());
-				//move.setColor(color);
-				paintComponent();
-			}
+			}ObjSelected.setnum(-1);
 		}
+		
+		public void thisMove(int n)
+		{
+			if(ObjSelected.getnum()>-1)
+				swap(0,ObjSelected.getnum());
+			else
+				System.out.println("Do nothing moving here");
+		}
+		public void thisDelete()
+		{
+			System.out.println(ObjSelected.getnum());
+			if(!(ObjSelected.getnum()<0))
+				{
+	  			delete(ObjSelected.getnum());
+	  			ObjSelected.setnum(-1);
+				}
+		}
+		
 		@Override
 		public void mouseClicked(MouseEvent me)
 		{
@@ -156,9 +207,11 @@ public class Canvas extends JPanel{
 			{
 				move = shapes.get(ObjSelected.getnum());
 				for(DShape s: shapes)
-				{s.draw(getGraphics());}
-			//	UI.model.fireTableDataChanged();
+				{
+					s.draw(getGraphics());
+				}			
 				System.out.println(move.model);
+
 			}	
 		}
 

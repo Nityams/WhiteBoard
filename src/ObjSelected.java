@@ -1,5 +1,5 @@
 public class ObjSelected {
-	private static int num;
+	private static int num=-1;
 	public static void setnum(int x)
 	{
 		num = x;

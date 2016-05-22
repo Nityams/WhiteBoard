@@ -28,46 +28,62 @@ public class DShapeModel {
 		return this; // or new DShapeModel(with params)
 	}
 	
+//	public void mine(Class cla)
+//	{
+//		if(cla.getName().equals("DRectModel"))
+//		{
+//			mine = new Rectangle2D.Double(x,y,height,width);
+//			System.out.println("Rect2d created"+ x+","+ y+","+ height+","+ width);
+//		}
+//		else if (cla.getName().equals("DOvalModel"))
+//		{
+//			mine = new Ellipse2D.Double(x, y, height, width);
+//			System.out.println("Oval 2D created"+ x+","+ y+","+ height+","+ width);
+//		}
+//		else
+//			System.out.println("mine error");
+//	}
+
 	// add by vic
 	public int getX() {
 		return x;
 	}
-	public void setX(int x){
-		this.x = x;
+	
+	public void setX(int x)
+	{
+		this.x=x;
 	}
-
+	
+	public void setY(int y)
+	{
+		this.y = y;
+	}
 	// add by vic
 	public int getY() {
 		return y;
-	}
-	public void setY(int y){
-		this.y = y;
 	}
 
 	// add by vic
 	public int getWidth() {
 		return width;
 	}
-	public void setWidth(int width){
-		this.width = width;
-	}
 
 	// add by vic
 	public int getHeight() {
 		return height;
 	}
-	public void setHeight(int height){
+	public void setHeight(int height)
+	{
 		this.height = height;
 	}
-	
-	public Color getColor(){
-		return color;
-	}
-	
-	public void setColor(Color color){
+	public void setColor(Color color)
+	{
 		this.color = color;
 	}
-	
+	public Color getColor()
+	{
+		return this.color;
+	}
 	// add by vic
 	public Object[] getArray() {
 		Object[] array = { x, y, height, width };
