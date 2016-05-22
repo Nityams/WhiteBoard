@@ -75,6 +75,10 @@ public class DShapeModel {
 	public int getWidth() {
 		return width;
 	}
+		public void setWidth(int width){
+		this.width=width;
+	}
+
 
 	// add by vic
 	public int getHeight() {
